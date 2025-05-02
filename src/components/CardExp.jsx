@@ -2,28 +2,32 @@ import React from "react";
 import Marquee from "react-fast-marquee";
 import { motion } from "framer-motion";
 
+import logoZahir from "../assets/img/Logo-Zahir-Red.png";
+import smkcoding from "../assets/img/smkcoding-light.webp";
+
+
 const experiences = [
   {
     title: "Internship as a Fullstack Developer",
-    image: "/src/assets/img/Logo-Zahir-Red.png",
+    image: logoZahir,
     description:
       "Interned at PT. Zahir Accounting from Aug 2024 to Dec 2024, developing web apps using React, Express.js, and Tailwind CSS.",
   },
   {
     title: "SMK Coding Competition by Alkademi",
-    image: "/src/assets/img/smkcoding-light.webp",
+    image: smkcoding,
     description:
       "Led a team in the SMK Coding Competition representing SMK Yadika Soreang, developing web apps with HTML, CSS, and JavaScript.",
   },
   {
     title: "Internship as a Fullstack Developer",
-    image: "/src/assets/img/Logo-Zahir-Red.png",
+    image: logoZahir,
     description:
       "Interned at PT. Zahir Accounting from Aug 2024 to Dec 2024, developing web apps using React, Express.js, and Tailwind CSS.",
   },
   {
     title: "SMK Coding Competition by Alkademi",
-    image: "/src/assets/img/smkcoding-light.webp",
+    image: smkcoding,
     description:
       "Led a team in the SMK Coding Competition representing SMK Yadika Soreang, developing web apps with HTML, CSS, and JavaScript.",
   },
