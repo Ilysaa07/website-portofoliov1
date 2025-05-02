@@ -100,7 +100,7 @@ const About = ({
 
   return (
     <h2 ref={containerRef} className={`my-5 ${containerClassName}`}>
-      <p className={`text-[clamp(1rem,2vw,2.3rem)] leading-[1.5] ${textClassName}`}>{splitText}</p>
+      <p className={`text-[clamp(1rem,1vw,2.3rem)] leading-[1.5] ${textClassName}`}>{splitText}</p>
     </h2>
   );
 };

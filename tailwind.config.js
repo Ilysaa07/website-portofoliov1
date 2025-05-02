@@ -6,7 +6,11 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      transitionProperty: {
+        'bg-colors': 'background-color, color, border-color',
+      },
+    },
   },
   plugins: [],
 }

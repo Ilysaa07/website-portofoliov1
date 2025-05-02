@@ -4,8 +4,13 @@ import About from "../components/About";
 import AboutTitle from "../components/AboutTitle";
 import CardExp from "../components/CardExp";
 import Dock from "../components/Dock";
-import Skills from "../components/Skills"
+import Skills from "../components/Skills";
+import CardProjek from "../components/CardProjek";
+import Lanyard from "../components/Lanyard";
+import Contact from "../components/Contact";
 import "../App.css";
+
+import Profil from "../assets/img/anomali.png";
 
 import { motion } from "framer-motion";
 import { FaFileAlt, FaInstagram, FaGithub, FaLinkedin } from "react-icons/fa";
@@ -16,7 +21,8 @@ export default function Home() {
     {
       icon: <FaLinkedin />,
       label: "LinkedIn",
-      onClick: () => window.open("https://www.linkedin.com/in/ilyasa-meydiansyah/"),
+      onClick: () =>
+        window.open("https://www.linkedin.com/in/ilyasa-meydiansyah/"),
     },
     {
       icon: <FaGithub />,
@@ -71,49 +77,54 @@ export default function Home() {
         />
       </section>
 
-      <Dock
-        items={items}
-        panelHeight={68}
-        baseItemSize={50}
-        magnification={70}
-      />
+      <section className="">
+        <Dock
+          items={items}
+          panelHeight={68}
+          baseItemSize={50}
+          magnification={70}
+        />
+      </section>
 
       <section
         className="mt-80 rounded-xl shadow-md border mx-auto max-w-3xl my-16 p-6 text-center space-y-4 bg-gray-100 border-gray-300 dark:bg-[#212121] dark:border-black transition-all"
         id="about"
       >
         <div className="w-full text-3xl md:text-4xl font-bold">
-        <AboutTitle
-          animationDuration={1}
-          ease="back.inOut(2)"
-          scrollStart="center bottom+=50%"
-          scrollEnd="bottom bottom-=40%"
-          stagger={0.03}
-        >
-          About Me
-        </AboutTitle>
+          <AboutTitle
+            animationDuration={1}
+            ease="back.inOut(2)"
+            scrollStart="center bottom+=50%"
+            scrollEnd="bottom bottom-=40%"
+            stagger={0.03}
+          >
+            About Me
+          </AboutTitle>
         </div>
-        <div className=" flex flex-col md:flex-row gap-4 font-mono">
-        <img
-          src="https://smkn2prabumulih.sch.id/assets/img/profile/default.jpg"
-          alt="profile"
-          className="w-50 h-[15rem] mt-[2rem] rounded-lg mx-auto md:mx-0 object-cover shadow-md border border-gray-300 dark:border-black transition-all transtion-transform"
-        />
-        <About
-          baseOpacity={0}
-          enableBlur={true}
-          baseRotation={0}
-          blurStrength={10}
-        >
-          As a detail-oriented and passionate web developer from Soreang, Bandung
-          Regency, West Java, Indonesia, I strive to craft exceptional and
-          engaging web experiences that meet the highest standards of quality
-          and usability.
-        </About>
+        <div className=" flex flex-col md:flex-row gap-4 font-mono text-gray-900 dark:text-white">
+          <img
+            src={Profil}
+            alt="profile"
+            className="w-50 h-[15rem] mt-[2rem] rounded-lg mx-auto md:mx-0 object-cover shadow-md border border-gray-300 dark:border-black transition-all transtion-transform"
+          />
+          <About
+            baseOpacity={0}
+            enableBlur={true}
+            baseRotation={0}
+            blurStrength={20}
+          >
+            I am a 17-year-old student from Bandung, West Java, Indonesia, with
+            a strong interest in the rapidly expanding field of technology. I
+            focus especially on software engineering and web development, where
+            I constantly learn new things and hone my craft. I have a natural
+            desire for learning and actively participate in a variety of coding
+            projects. I also keep up with the most recent advancements in
+            technology. Beyond academics, I have hobbies like gaming, coding, and
+            kickboxing, all of which enhance my creative and problem-solving
+            skills.
+          </About>
         </div>
       </section>
-
-      
 
       <section className="w-full max-w-3xl mx-auto my-10 space-y-4   px-4 ">
         <div className="text-3xl md:text-4xl font-bold text-left md:ml-10">
@@ -131,41 +142,57 @@ export default function Home() {
       </section>
 
       <motion.section
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
-      viewport={{ once: true, amount: 0.2 }}
-      className="w-full max-w-3xl mx-auto my-24 px-4 md:px-10 py-5 bg-gray-100 border border-gray-300 dark:bg-[#212121] dark:border-black rounded-3xl shadow-lg transition-all"
-    >
-      <div className="text-3xl md:text-4xl font-bold text-left flex justify-center">
-        <AboutTitle
-          animationDuration={1}
-          ease="back.inOut(2)"
-          scrollStart="center bottom+=50%"
-          scrollEnd="bottom bottom-=40%"
-          stagger={0.03}
-        >
-          Skills
-        </AboutTitle>
-        
-      </div>
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        viewport={{ once: true, amount: 0.2 }}
+        className="w-full max-w-3xl mx-auto my-24 px-4 md:px-10 py-5 bg-gray-100 border border-gray-300 dark:bg-[#212121] dark:border-black rounded-3xl shadow-lg transition-all"
+      >
+        <div className="text-3xl md:text-4xl font-bold text-left flex justify-center">
+          <AboutTitle
+            animationDuration={1}
+            ease="back.inOut(2)"
+            scrollStart="center bottom+=50%"
+            scrollEnd="bottom bottom-=40%"
+            stagger={0.03}
+          >
+            Skills
+          </AboutTitle>
+        </div>
 
-      <Skills />
-    </motion.section>
-    <section className="projek">
-    <div className="text-3xl md:text-4xl font-bold text-left flex justify-center">
-        <AboutTitle
-          animationDuration={1}
-          ease="back.inOut(2)"
-          scrollStart="center bottom+=50%"
-          scrollEnd="bottom bottom-=40%"
-          stagger={0.03}
-        >
-          Recent Project
-        </AboutTitle>
-        
+        <Skills />
+      </motion.section>
+      <section className="projek">
+        <div className="text-3xl md:text-4xl font-bold text-left flex justify-center">
+          <AboutTitle
+            animationDuration={1}
+            ease="back.inOut(2)"
+            scrollStart="center bottom+=50%"
+            scrollEnd="bottom bottom-=40%"
+            stagger={0.03}
+          >
+            Recent Project
+          </AboutTitle>
+        </div>
+      </section>
+      <CardProjek />
+      <div className="containerProjek flex">
+        <section className="kontak dark:bg-[#212121] dark:text-white bg-[#e4e6eb] text-black rounded-r-full w-[60rem] h-[30rem] mt-20 pt-5 pb-5">
+          <div className="text-3xl md:text-4xl font-bold text-left ml-10 ">
+            <AboutTitle
+              animationDuration={1}
+              ease="back.inOut(2)"
+              scrollStart="center bottom+=50%"
+              scrollEnd="bottom bottom-=40%"
+              stagger={0.03}
+            >
+              Contact
+            </AboutTitle>
+          </div>
+          <Contact />
+        </section>
+        <Lanyard position={[0, 0, 20]} gravity={[0, -40, 0]} />
       </div>
-    </section>
     </div>
   );
 }
