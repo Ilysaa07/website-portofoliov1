@@ -8,15 +8,15 @@ export default function NavLinks({ onClick, isMobile = false }) {
           key={link}
           href={`#${link}`}
           onClick={onClick}
-          className={`nav-link capitalize font-mono transition-all duration-300 relative ${
-            isMobile
+          className={`nav-link group capitalize font-mono relative px-2 py-1 transition-all duration-300
+            ${isMobile
               ? "text-black dark:text-white hover:text-red-400"
               : "text-gray-800 dark:text-white hover:text-red-500"
-          }`}
+            }`}
         >
           {link}
           <span
-            className={`absolute left-0 bottom-0 w-0 h-[2px] bg-red-500 transition-all duration-300 group-hover:w-full`}
+            className="absolute left-0 -bottom-0.5 h-[2px] w-0 bg-red-500 transition-all duration-300 group-hover:w-full"
           ></span>
         </a>
       ))}

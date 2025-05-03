@@ -150,18 +150,6 @@ export default function Home() {
         viewport={{ once: true, amount: 0.2 }}
         className="w-full max-w-3xl mx-auto my-24 px-4 md:px-10 py-5 bg-gray-100 border border-gray-300 dark:bg-[#212121] dark:border-black rounded-3xl shadow-lg transition-all"
       >
-        <div className="text-3xl md:text-4xl font-bold text-left flex justify-center">
-          <AboutTitle
-            animationDuration={1}
-            ease="back.inOut(2)"
-            scrollStart="center bottom+=50%"
-            scrollEnd="bottom bottom-=40%"
-            stagger={0.03}
-          >
-            Skills
-          </AboutTitle>
-        </div>
-
         <Skills />
       </motion.section>
       <section className="projek">
@@ -178,22 +166,7 @@ export default function Home() {
         </div>
       </section>
       <CardProjek />
-      <div className="containerProjek flex flex-col lg:flex-row items-center justify-center gap-10 px-4">
-        <section className="kontak dark:bg-[#212121] dark:text-white bg-[#e4e6eb] text-black rounded-3xl w-full max-w-5xl h-auto p-6 lg:rounded-r-full lg:w-[60rem] lg:h-[30rem] mt-20">
-          <div className="text-3xl md:text-4xl font-bold text-left ml-10 ">
-            <AboutTitle
-              animationDuration={1}
-              ease="back.inOut(2)"
-              scrollStart="center bottom+=50%"
-              scrollEnd="bottom bottom-=40%"
-              stagger={0.03}
-            >
-              Contact
-            </AboutTitle>
-          </div>
-          <Contact />
-        </section>
-      </div>
+      <Contact />
     </div>
   );
 }

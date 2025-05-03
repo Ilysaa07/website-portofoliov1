@@ -38,30 +38,33 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav className="sticky top-0 z-50 bg-white/70 dark:bg-[#121212] backdrop-blur-sm shadow-sm transition-bg-colors duration-300">
-
+    <nav className="sticky top-0 z-50 bg-white/80 dark:bg-[#0f0f0f]/80 backdrop-blur-md shadow-md transition-all duration-300">
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-        {/* Logo / Brand */}
-        <div className="text-lg font-bold text-gray-900 dark:text-white">Portofolio</div>
-
-        {/* Desktop Nav */}
-        <div className="hidden md:flex gap-6 items-center">
-          <NavLinks />
-          <button
-  onClick={toggleDark}
-  className="text-xl transition-colors duration-300 hover:text-yellow-400 dark:text-white text-gray-800"
->
-  {isDark ? <FaSun /> : <FaMoon />}
-</button>
-
+        <div className="text-xl font-bold tracking-wide text-gray-900 dark:text-white hover:scale-105 transition-transform duration-300">
+          <span className="text-red-400 dark:text-red-500">My</span>Portfolio
         </div>
 
-        {/* Mobile Buttons */}
-        <div className="md:hidden flex items-center gap-4 text-xl text-gray-800 dark:text-white">
-          <button onClick={toggleDark} className="hover:text-yellow-400">
-            {isDark ? <FaSun /> : <FaMoon />}
+        <div className="hidden md:flex items-center gap-6">
+          <NavLinks />
+          <button
+            onClick={toggleDark}
+            className="text-xl p-2 rounded-full hover:bg-gray-200 dark:hover:bg-neutral-700 transition"
+            aria-label="Toggle Theme"
+          >
+            {isDark ? (
+              <FaSun className="text-yellow-400" />
+            ) : (
+              <FaMoon className="text-gray-700" />
+            )}
           </button>
-          <button onClick={() => setIsOpen(!isOpen)}>
+        </div>
+
+        {/* Mobile Toggle */}
+        <div className="md:hidden flex items-center gap-4 text-xl text-gray-800 dark:text-white">
+          <button onClick={toggleDark} className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-neutral-700">
+            {isDark ? <FaSun className="text-yellow-400" /> : <FaMoon />}
+          </button>
+          <button onClick={() => setIsOpen(!isOpen)} className="p-2 rounded hover:bg-gray-200 dark:hover:bg-neutral-700">
             {isOpen ? <FaTimes /> : <FaBars />}
           </button>
         </div>
@@ -69,15 +72,14 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       <div
-  className={`md:hidden overflow-hidden transition-all duration-500 ease-in-out transform ${
-    isOpen ? "max-h-[300px] opacity-100 translate-y-0" : "max-h-0 opacity-0 -translate-y-4"
-  } bg-[#e5e7eb]  dark:bg-[#1f1f1f]`}
->
-  <div className="flex flex-col gap-4 p-4">
-    <NavLinks onClick={() => setIsOpen(false)} isMobile />
-  </div>
-</div>
-
+        className={`md:hidden overflow-hidden transition-all duration-500 ease-in-out transform ${
+          isOpen ? "max-h-[300px] opacity-100 translate-y-0" : "max-h-0 opacity-0 -translate-y-4"
+        } bg-gray-100 dark:bg-neutral-900`}
+      >
+        <div className="flex flex-col gap-4 px-6 py-4">
+          <NavLinks onClick={() => setIsOpen(false)} isMobile />
+        </div>
+      </div>
     </nav>
   );
 }
