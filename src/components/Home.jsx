@@ -8,6 +8,7 @@ import Skills from "../components/Skills";
 import CardProjek from "../components/CardProjek";
 import Lanyard from "../components/Lanyard";
 import Contact from "../components/Contact";
+import { Toaster } from 'react-hot-toast';
 import "../App.css";
 
 import Profil from "../assets/img/anomali.png";
@@ -43,9 +44,10 @@ export default function Home() {
 
   return (
     <div className="bg-white text-gray-900 dark:bg-[#121212] dark:text-white transition-colors duration-300">
+      <Toaster position="top-center" reverseOrder={false} />
       <section
         id="home"
-        className="min-h-full pt-32 flex flex-col items-center justify-center px-4 text-center space-y-4"
+        className="min-h-full pt-32 px-4 text-center space-y-4 flex flex-col items-center justify-center"
       >
         <SplitText
           text="Hello, I'm"
@@ -77,7 +79,7 @@ export default function Home() {
         />
       </section>
 
-      <section className="">
+      <section className="mt-[6rem]">
         <Dock
           items={items}
           panelHeight={68}
@@ -105,8 +107,9 @@ export default function Home() {
           <img
             src={Profil}
             alt="profile"
-            className="w-50 h-[15rem] mt-[2rem] rounded-lg mx-auto md:mx-0 object-cover shadow-md border border-gray-300 dark:border-black transition-all transtion-transform"
+            className="w-full max-w-xs h-[15rem] mt-[2rem] rounded-lg mx-auto md:mx-0 object-cover shadow-md border border-gray-300 dark:border-black transition-all"
           />
+
           <About
             baseOpacity={0}
             enableBlur={true}
@@ -119,8 +122,8 @@ export default function Home() {
             I constantly learn new things and hone my craft. I have a natural
             desire for learning and actively participate in a variety of coding
             projects. I also keep up with the most recent advancements in
-            technology. Beyond academics, I have hobbies like gaming, coding, and
-            kickboxing, all of which enhance my creative and problem-solving
+            technology. Beyond academics, I have hobbies like gaming, coding,
+            and kickboxing, all of which enhance my creative and problem-solving
             skills.
           </About>
         </div>
@@ -176,8 +179,8 @@ export default function Home() {
         </div>
       </section>
       <CardProjek />
-      <div className="containerProjek flex">
-        <section className="kontak dark:bg-[#212121] dark:text-white bg-[#e4e6eb] text-black rounded-r-full w-[60rem] h-[30rem] mt-20 pt-5 pb-5">
+      <div className="containerProjek flex flex-col lg:flex-row items-center justify-center gap-10 px-4">
+        <section className="kontak dark:bg-[#212121] dark:text-white bg-[#e4e6eb] text-black rounded-3xl w-full max-w-5xl h-auto p-6 lg:rounded-r-full lg:w-[60rem] lg:h-[30rem] mt-20">
           <div className="text-3xl md:text-4xl font-bold text-left ml-10 ">
             <AboutTitle
               animationDuration={1}
@@ -191,7 +194,10 @@ export default function Home() {
           </div>
           <Contact />
         </section>
+
+        <section className="lanyard">
         <Lanyard position={[0, 0, 20]} gravity={[0, -40, 0]} />
+        </section>
       </div>
     </div>
   );

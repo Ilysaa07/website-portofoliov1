@@ -1,69 +1,102 @@
+import { useEffect, useState } from "react";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 import { motion } from "framer-motion";
 
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.15,
+    },
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0 },
+};
+
 export default function CardProjek() {
+  const [repos, setRepos] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  useEffect(() => {
+    fetch("https://api.github.com/users/Ilysaa07/repos")
+      .then((res) => res.json())
+      .then((data) => {
+        const sorted = data.sort((a, b) =>
+          new Date(b.updated_at) - new Date(a.updated_at)
+        );
+        setRepos(sorted);
+      });
+  }, []);
+
+  // Filter repos berdasarkan searchQuery
+  const filteredRepos = repos.filter((repo) =>
+    repo.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
-    <div className="bodycontainer grid grid-cols-1 md:grid-cols-2 gap-4">
-      {cards.map((card, index) => (
-        <motion.div
-          key={card.title}
-          initial={{ x: card.x, opacity: 0, boxShadow: "0 0 0 rgba(0, 0, 0, 0)" }}
-          animate={{ x: 0, opacity: 1, boxShadow: "0 10px 20px rgba(0, 0, 0, 0.2)" }}
-          transition={{ duration: 0.5 }}
-          whileHover={{ scale: 1.02 }}
-          className="card dark:bg-[#212121] bg-[#e4e6eb] rounded-lg"
-        >
-          <div className="card-body">
-            <img src={card.image} alt={card.title} className="w-full h-48 object-cover" />
-            <h5 className="card-title">{card.title}</h5>
-            <p className="card-text">{card.description}</p>
-            <div className="flex justify-center gap-4">
-              <a href={card.link} className="btn btn-primary">
-                <FaGithub />
-              </a>
-              <a href={card.demo} className="btn btn-primary">
-                <FaExternalLinkAlt />
-              </a>
+    <div className="px-4 py-8">
+      {/* Pencarian */}
+      <input
+        type="text"
+        placeholder="Cari proyek..."
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        className="w-full mb-6 p-2 rounded-md border border-gray-300 dark:border-gray-700 dark:bg-[#1e1e1e] dark:text-white"
+      />
+
+      {/* Grid Card */}
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+      >
+        {filteredRepos.map((repo) => (
+          <motion.div
+            key={repo.id}
+            variants={cardVariants}
+            whileHover={{ scale: 1.03 }}
+            className="bg-white dark:bg-[#1e1e1e] rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300"
+          >
+            <img
+              src={`https://picsum.photos/seed/${repo.name}/400/300`}
+              alt={repo.name}
+              className="w-full h-48 object-cover"
+            />
+            <div className="p-5 flex flex-col justify-between">
+              <h3 className="text-xl font-semibold mb-2 text-gray-800 dark:text-white">
+                {repo.name}
+              </h3>
+              <p className="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                {repo.description || "Tidak ada deskripsi"}
+              </p>
+              <div className="flex justify-between items-center mt-auto">
+                <a
+                  href={repo.html_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-200 hover:text-blue-500 transition"
+                >
+                  <FaGithub /> GitHub
+                </a>
+                {repo.homepage && (
+                  <a
+                    href={repo.homepage}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-200 hover:text-green-500 transition"
+                  >
+                    <FaExternalLinkAlt /> Live Demo
+                  </a>
+                )}
+              </div>
             </div>
-          </div>
-        </motion.div>
-      ))}
+          </motion.div>
+        ))}
+      </motion.div>
     </div>
   );
 }
-
-const cards = [
-  {
-    title: "Card title",
-    image: "https://picsum.photos/200/300",
-    description: "Some quick example text to build on the card title and make up the bulk of the card's content.",
-    link: "#",
-    demo: "#",
-    x: -100,
-  },
-  {
-    title: "Card title",
-    image: "https://picsum.photos/200/301",
-    description: "Some quick example text to build on the card title and make up the bulk of the card's content.",
-    link: "#",
-    demo: "#",
-    x: 100,
-  },
-  {
-    title: "Card title",
-    image: "https://picsum.photos/200/302",
-    description: "Some quick example text to build on the card title and make up the bulk of the card's content.",
-    link: "#",
-    demo: "#",
-    x: -100,
-  },
-  {
-    title: "Card title",
-    image: "https://picsum.photos/200/303",
-    description: "Some quick example text to build on the card title and make up the bulk of the card's content.",
-    link: "#",
-    demo: "#",
-    x: 100,
-  },
-];
-

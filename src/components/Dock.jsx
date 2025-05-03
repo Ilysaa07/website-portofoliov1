@@ -1,6 +1,5 @@
 "use client";
 
-
 import {
   motion,
   useMotionValue,
@@ -57,7 +56,7 @@ function DockItem({
       onFocus={() => isHovered.set(1)}
       onBlur={() => isHovered.set(0)}
       onClick={onClick}
-      className={`relative inline-flex items-center justify-center rounded-full dark:bg-[#060606] bg-white border-neutral-700 border-2 shadow-md ${className}`}
+      className={`relative inline-flex items-center justify-center rounded-full dark:bg-[#060606] bg-white border-neutral-700 border-2 shadow-md transition-all ${className}`}
       tabIndex={0}
       role="button"
       aria-haspopup="true"
@@ -88,7 +87,7 @@ function DockLabel({ children, className = "", ...rest }) {
           animate={{ opacity: 1, y: -10 }}
           exit={{ opacity: 0, y: 0 }}
           transition={{ duration: 0.2 }}
-          className={`${className} absolute -top-6 left-1/2 w-fit whitespace-pre rounded-md border border-neutral-700 bg-[#060606] px-2 py-0.5 text-xs text-white`}
+          className={`${className} absolute -top-6 left-1/2 w-fit whitespace-pre rounded-md border border-neutral-700 bg-[#060606] px-2 py-0.5 text-xs text-white z-10`}
           role="tooltip"
           style={{ x: "-50%" }}
         >
@@ -129,8 +128,8 @@ export default function Dock({
 
   return (
     <motion.div
-      style={{ height, scrollbarWidth: "none" }}
-      className="mx-2 flex max-w-full items-center"
+      style={{ height }}
+      className="w-full flex justify-center items-end px-2 md:px-6 lg:px-12 overflow-x-auto"
     >
       <motion.div
         onMouseMove={({ pageX }) => {
@@ -141,7 +140,7 @@ export default function Dock({
           isHovered.set(0);
           mouseX.set(Infinity);
         }}
-        className={`${className} absolute bottom-2 left-1/2 transform -translate-x-1/2 flex items-end w-fit gap-4 rounded-2xl border-neutral-700 border-2 pb-2 px-4`}
+        className={`bottom-2 flex items-end gap-3 rounded-2xl border-2 border-neutral-700 bg-white dark:bg-[#060606] px-3 py-2 shadow-lg ${className}`}
         style={{ height: panelHeight }}
         role="toolbar"
         aria-label="Application dock"
