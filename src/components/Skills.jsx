@@ -13,7 +13,7 @@ import {
 
 import { SiVite } from "react-icons/si";
 import { RiTailwindCssFill } from "react-icons/ri";
-import { SiPhp, SiExpress, SiGithub, SiMysql } from "react-icons/si";
+import { SiPhp, SiExpress, SiGithub, SiLaravel, SiMysql } from "react-icons/si";
 import { IoLogoJavascript } from "react-icons/io5";
 
 const skills = [
@@ -27,6 +27,7 @@ const skills = [
   { name: "Vite", icon: <SiVite className="text-yellow-500" /> },
   { name: "Express.js", icon: <SiExpress className="text-green-500" /> },
   { name: "Node.js", icon: <FaNodeJs className="text-green-500" /> },
+  { name: "Laravel", icon: <SiLaravel className="text-red-500" /> },
   { name: "MySQL", icon: <SiMysql className="text-blue-700" /> },
   { name: "Git", icon: <FaGitAlt className="text-red-500" /> },
   { name: "Github", icon: <SiGithub className="text-black" /> },
