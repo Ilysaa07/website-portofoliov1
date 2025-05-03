@@ -6,7 +6,6 @@ import CardExp from "../components/CardExp";
 import Dock from "../components/Dock";
 import Skills from "../components/Skills";
 import CardProjek from "../components/CardProjek";
-import Lanyard from "../components/Lanyard";
 import Contact from "../components/Contact";
 import { Toaster } from 'react-hot-toast';
 import "../App.css";
@@ -193,10 +192,6 @@ export default function Home() {
             </AboutTitle>
           </div>
           <Contact />
-        </section>
-
-        <section className="lanyard">
-        <Lanyard position={[0, 0, 20]} gravity={[0, -40, 0]} />
         </section>
       </div>
     </div>
