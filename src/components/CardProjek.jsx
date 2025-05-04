@@ -84,10 +84,19 @@ export default function CardProjek() {
               className="bg-white dark:bg-[#1e1e1e] rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden"
             >
               <img
-                src={`https://picsum.photos/seed/${repo.name}/400/300`}
+                src={
+                  repo.name &&
+                  `https://raw.githubusercontent.com/Ilysaa07/${repo.name}/main/preview.png`
+                }
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src =
+                    "https://via.placeholder.com/400x300?text=No+Image";
+                }}
                 alt={repo.name}
                 className="w-full h-48 object-cover"
               />
+
               <div className="p-5 flex flex-col justify-between">
                 <h3 className="text-xl font-semibold mb-2 text-gray-800 dark:text-white capitalize">
                   {repo.name.replace(/-/g, " ")}

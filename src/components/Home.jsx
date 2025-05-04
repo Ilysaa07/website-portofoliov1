@@ -37,7 +37,12 @@ export default function Home() {
     {
       icon: <FaFileAlt />,
       label: "Download CV",
-      onClick: () => alert("Coming Soon"),
+      onClick: () => {
+        const link = document.createElement("a");
+        link.href = "/cv/cv.pdf"; // pastikan path ini sesuai
+        link.download = "cv-ilyasa.pdf";
+        link.click();
+      },
     },
   ];
 
@@ -78,7 +83,7 @@ export default function Home() {
         />
       </section>
 
-      <section className="mt-[6rem]">
+      <section >
         <Dock
           items={items}
           panelHeight={68}
@@ -129,17 +134,6 @@ export default function Home() {
       </section>
 
       <section className="w-full max-w-3xl mx-auto my-10 space-y-4   px-4 ">
-        <div className="text-3xl md:text-4xl font-bold text-left md:ml-10">
-          <AboutTitle
-            animationDuration={1}
-            ease="back.inOut(2)"
-            scrollStart="center bottom+=50%"
-            scrollEnd="bottom bottom-=40%"
-            stagger={0.03}
-          >
-            Experience
-          </AboutTitle>
-        </div>
         <CardExp />
       </section>
 
@@ -152,7 +146,7 @@ export default function Home() {
       >
         <Skills />
       </motion.section>
-      <section className="projek">
+      <section className="projek" id="projects">
         <div className="text-3xl md:text-4xl font-bold text-left flex justify-center">
           <AboutTitle
             animationDuration={1}
@@ -166,7 +160,9 @@ export default function Home() {
         </div>
       </section>
       <CardProjek />
+      <section id="contact">
       <Contact />
+      </section>
     </div>
   );
 }

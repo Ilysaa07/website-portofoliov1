@@ -6,7 +6,9 @@
 html, body, #root {
     transition: background-color 0.3s, color 0.3s;
     scroll-behavior: smooth;
+    
   }
+  
 
   @keyframes fadeIn {
     0% {
@@ -38,3 +40,18 @@ html, body, #root {
     animation: fadeInZoom 0.3s ease-out;
   }
   
+  /* Optional: Smooth card shadows + glass feel */
+.card-glass {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+}
+
+/* CSS untuk menghilangkan scrollbar */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE/Edge */
+  scrollbar-width: none;     /* Firefox */
+}

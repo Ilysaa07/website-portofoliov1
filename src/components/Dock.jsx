@@ -1,20 +1,7 @@
 "use client";
 
-import {
-  motion,
-  useMotionValue,
-  useSpring,
-  useTransform,
-  AnimatePresence,
-} from "framer-motion";
-import {
-  Children,
-  cloneElement,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { Children, cloneElement, useEffect, useMemo, useRef } from "react";
 
 function DockItem({
   children,
@@ -25,17 +12,24 @@ function DockItem({
   distance,
   magnification,
   baseItemSize,
+  label, // 🆕 Tambahkan label
 }) {
   const ref = useRef(null);
-  const isHovered = useMotionValue(0);
+  const itemCenterX = useMotionValue(0);
 
-  const mouseDistance = useTransform(mouseX, (val) => {
-    const rect = ref.current?.getBoundingClientRect() ?? {
-      x: 0,
-      width: baseItemSize,
+  useEffect(() => {
+    const updateCenter = () => {
+      const rect = ref.current?.getBoundingClientRect();
+      if (rect) {
+        itemCenterX.set(rect.left + rect.width / 2);
+      }
     };
-    return val - rect.x - baseItemSize / 2;
-  });
+    updateCenter();
+    window.addEventListener("resize", updateCenter);
+    return () => window.removeEventListener("resize", updateCenter);
+  }, [itemCenterX]);
+
+  const mouseDistance = useTransform(mouseX, (val) => val - itemCenterX.get());
 
   const targetSize = useTransform(
     mouseDistance,
@@ -44,57 +38,37 @@ function DockItem({
   );
   const size = useSpring(targetSize, spring);
 
+  // 🆕 Tooltip animation
+  const labelOpacity = useTransform(mouseDistance, [-60, 0, 60], [0, 1, 0]);
+  const labelTranslateY = useTransform(mouseDistance, [-60, 0, 60], [10, 0, 10]);
+
   return (
     <motion.div
       ref={ref}
-      style={{
-        width: size,
-        height: size,
-      }}
-      onHoverStart={() => isHovered.set(1)}
-      onHoverEnd={() => isHovered.set(0)}
-      onFocus={() => isHovered.set(1)}
-      onBlur={() => isHovered.set(0)}
+      style={{ width: size, height: size }}
       onClick={onClick}
       className={`relative inline-flex items-center justify-center rounded-full dark:bg-[#060606] bg-white border-neutral-700 border-2 shadow-md transition-all ${className}`}
       tabIndex={0}
       role="button"
       aria-haspopup="true"
     >
-      {Children.map(children, (child) =>
-        cloneElement(child, { isHovered })
-      )}
-    </motion.div>
-  );
-}
+      {Children.map(children, (child) => cloneElement(child))}
 
-function DockLabel({ children, className = "", ...rest }) {
-  const { isHovered } = rest;
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const unsubscribe = isHovered.on("change", (latest) => {
-      setIsVisible(latest === 1);
-    });
-    return () => unsubscribe();
-  }, [isHovered]);
-
-  return (
-    <AnimatePresence>
-      {isVisible && (
+      {/* 🆕 Tooltip */}
+      {label && (
         <motion.div
-          initial={{ opacity: 0, y: 0 }}
-          animate={{ opacity: 1, y: -10 }}
-          exit={{ opacity: 0, y: 0 }}
-          transition={{ duration: 0.2 }}
-          className={`${className} absolute -top-6 left-1/2 w-fit whitespace-pre rounded-md border border-neutral-700 bg-[#060606] px-2 py-0.5 text-xs text-white z-10`}
-          role="tooltip"
-          style={{ x: "-50%" }}
+          className="absolute -top-6 text-xs text-neutral-700 dark:text-neutral-300 px-2 py-0.5 rounded bg-neutral-200 dark:bg-neutral-800 z-10"
+          style={{
+            opacity: labelOpacity,
+            y: labelTranslateY,
+            pointerEvents: "none",
+            whiteSpace: "nowrap",
+          }}
         >
-          {children}
+          {label}
         </motion.div>
       )}
-    </AnimatePresence>
+    </motion.div>
   );
 }
 
@@ -117,13 +91,12 @@ export default function Dock({
   baseItemSize = 50,
 }) {
   const mouseX = useMotionValue(Infinity);
-  const isHovered = useMotionValue(0);
 
   const maxHeight = useMemo(
     () => Math.max(dockHeight, magnification + magnification / 2 + 4),
     [magnification, dockHeight]
   );
-  const heightRow = useTransform(isHovered, [0, 1], [panelHeight, maxHeight]);
+  const heightRow = useTransform(mouseX, [0, 1], [panelHeight, maxHeight]);
   const height = useSpring(heightRow, spring);
 
   return (
@@ -132,14 +105,8 @@ export default function Dock({
       className="w-full flex justify-center items-end px-2 md:px-6 lg:px-12 overflow-x-auto"
     >
       <motion.div
-        onMouseMove={({ pageX }) => {
-          isHovered.set(1);
-          mouseX.set(pageX);
-        }}
-        onMouseLeave={() => {
-          isHovered.set(0);
-          mouseX.set(Infinity);
-        }}
+        onMouseMove={({ pageX }) => mouseX.set(pageX)}
+        onMouseLeave={() => mouseX.set(Infinity)}
         className={`bottom-2 flex items-end gap-3 rounded-2xl border-2 border-neutral-700 bg-white dark:bg-[#060606] px-3 py-2 shadow-lg ${className}`}
         style={{ height: panelHeight }}
         role="toolbar"
@@ -155,9 +122,9 @@ export default function Dock({
             distance={distance}
             magnification={magnification}
             baseItemSize={baseItemSize}
+            label={item.label} // 🆕 Berikan label ke DockItem
           >
             <DockIcon>{item.icon}</DockIcon>
-            <DockLabel>{item.label}</DockLabel>
           </DockItem>
         ))}
       </motion.div>

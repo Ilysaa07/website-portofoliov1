@@ -143,11 +143,9 @@ export default function Contact() {
             type="submit"
             disabled={loading}
             className="mt-2 
-    bg-gradient-to-r from-red-600 to-gray-900 
-    dark:from-red-500 dark:to-black
-    text-white py-3 rounded-xl font-semibold 
-    hover:from-red-700 hover:to-black 
-    dark:hover:from-red-600 dark:hover:to-neutral-800
+    bg-black dark:bg-neutral-700 
+    text-white dark:text-white py-3 rounded-xl font-semibold 
+    hover:bg-gray-100 dark:hover:bg-neutral-600
     transition-all duration-300 
     flex justify-center items-center gap-2 
     disabled:opacity-60 disabled:cursor-not-allowed"
@@ -185,3 +183,4 @@ export default function Contact() {
     </section>
   );
 }
+
