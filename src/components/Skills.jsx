@@ -6,7 +6,6 @@ import {
   FaBootstrap,
   FaGitAlt,
   FaGithub,
-  FaNodeJs,
   FaNpm,
   FaFileWord,
   FaFileExcel
@@ -33,7 +32,6 @@ const skills = [
   { name: "React", icon: <FaReact className="text-cyan-400" /> },
   { name: "Vite", icon: <SiVite className="text-yellow-500" /> },
   { name: "Express.js", icon: <SiExpress className="text-green-500" /> },
-  { name: "Node.js", icon: <FaNodeJs className="text-green-500" /> },
   { name: "MySQL", icon: <SiMysql className="text-blue-700" /> },
   { name: "Git", icon: <FaGitAlt className="text-red-500" /> },
   { name: "Github", icon: <SiGithubAlt className="text-black" /> },
@@ -136,4 +134,3 @@ export default function Skills() {
     </div>
   );
 }
-  
